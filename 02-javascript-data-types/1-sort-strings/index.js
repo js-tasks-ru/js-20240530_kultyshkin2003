@@ -7,20 +7,15 @@
 export function sortStrings(arr, param = 'asc') {
   let sortedArr;
 
+  const sortingLc = (firstParam, secondParam) => firstParam.localeCompare(secondParam, ['ru', 'en'], {caseFirst: 'upper'})
+
   const sortsMethods = {
-    asc: (arr) => {
-      return [...arr].sort((a, b) => {
-        return a.localeCompare(b, ['ru', 'en'], {caseFirst: 'upper'});
-      });
-    },
-    desc: (arr) => {
-      return [...arr].sort((a, b) => {
-        return b.localeCompare(a, ['ru', 'en'], {caseFirst: 'upper'});
-      });
-    }
+    asc: (arr) => [...arr].sort((a, b) => sortingLc(a, b)),
+    desc: (arr) => [...arr].sort((a, b) => sortingLc(b, a))
   };
 
   sortedArr = sortsMethods[param](arr);
 
   return sortedArr;
+
 }
